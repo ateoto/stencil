@@ -43,6 +43,7 @@ func main() {
         input := c.String("template")
         output := c.String("output")
 
+
         if output != "" {
             var err error
             output_fp, err = os.OpenFile(output, os.O_CREATE|os.O_WRONLY, 0744)
@@ -55,7 +56,8 @@ func main() {
 
         tmpl, err := template.ParseFiles(input)
         if err != nil {
-            panic(err)
+            fmt.Printf("Error reading template file: %s\n", err)
+            os.Exit(1)
         }
 
         context := make(map[string]string)
